@@ -23,6 +23,7 @@ import com.proyecto.agenda.model.User;
 @ComponentScan("com.proyecto.agenda")
 @EnableTransactionManagement
 public class ApplicationContextConfig {
+	
     @Bean(name = "viewResolver")
     public InternalResourceViewResolver getViewResolver() {
         InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
