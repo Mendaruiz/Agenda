@@ -29,8 +29,12 @@
 			<th>Email</th>
 			<th>Acciones</th>
 			</tr>
-
-			<c:forEach var="user" items="${userList}" varStatus="status">
+			<% 
+				//request.getAttribute("list");
+			
+			
+			%>
+			<c:forEach var="user" items="${list}" varStatus="status">
 				<tr>
 					<td>${status.index + 1}</td>
 					<td>${user.username}</td>
