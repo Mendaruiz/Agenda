@@ -16,6 +16,12 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
+import com.proyecto.agenda.model.Categoria;
+import com.proyecto.agenda.model.Departamento;
+import com.proyecto.agenda.model.Direccion;
+import com.proyecto.agenda.model.Empleado;
+import com.proyecto.agenda.model.Persona;
+import com.proyecto.agenda.model.Telefono;
 import com.proyecto.agenda.model.User;
 
 
@@ -43,7 +49,7 @@ public class ApplicationContextConfig {
     public DataSource getDataSource() {
     	BasicDataSource dataSource = new BasicDataSource();
     	dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-    	dataSource.setUrl("jdbc:mysql://localhost:3306/usersdb");
+    	dataSource.setUrl("jdbc:mysql://localhost:3306/agenda");
     	dataSource.setUsername("root");
     	dataSource.setPassword("1111");
     	
@@ -65,6 +71,15 @@ public class ApplicationContextConfig {
     	LocalSessionFactoryBuilder sessionBuilder = new LocalSessionFactoryBuilder(dataSource);
     	sessionBuilder.addProperties(getHibernateProperties());
     	sessionBuilder.addAnnotatedClasses(User.class);
+    	sessionBuilder.addAnnotatedClasses(Categoria.class);
+    	sessionBuilder.addAnnotatedClasses(Departamento.class);
+    	sessionBuilder.addAnnotatedClasses(Direccion.class);
+    	sessionBuilder.addAnnotatedClasses(Empleado.class);
+    	sessionBuilder.addAnnotatedClasses(Persona.class);
+    	sessionBuilder.addAnnotatedClasses(Telefono.class);
+    	
+    	//Falta añadir todas las clases de model
+    	
     	return sessionBuilder.buildSessionFactory();
     }
     
