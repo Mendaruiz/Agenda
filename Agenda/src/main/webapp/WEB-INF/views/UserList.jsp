@@ -26,7 +26,7 @@
 		<tr>
 			<th>Nº</th>
 			<th>Usuario</th>
-			<th>Email</th>
+			<th>Apellidos</th>
 			<th>Acciones</th>
 			</tr>
 			<% 
@@ -34,14 +34,17 @@
 			
 			
 			%>
-			<c:forEach var="user" items="${list}" varStatus="status">
+			<c:forEach var="persona" items="${listaPersona}" varStatus="status">
 				<tr>
 					<td>${status.index + 1}</td>
-					<td>${user.username}</td>
-					<td>${user.email}</td>
-					<td><a href="edit?id=${user.id}">Modificar</a>
+					<td>${persona.nombre}</td>
+					<td>${persona.apellido1} ${persona.apellido2}</td>
+					<td>${persona.fechaNacimiento}</td>
+					<!--
+					<td><a href="edit?id=${persona.id}">Modificar</a>
 						&nbsp;&nbsp;&nbsp;&nbsp; <a href="delete?id=${user.id}">Eliminar</a>
 					</td>
+					-->
 				</tr>
 			</c:forEach>
 		</table>
