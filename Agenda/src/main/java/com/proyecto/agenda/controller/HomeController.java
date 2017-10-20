@@ -3,19 +3,25 @@ package com.proyecto.agenda.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.proyecto.agenda.model.Persona;
 import com.proyecto.agenda.model.User;
+import com.proyecto.agenda.services.IPersonaService;
 
 @Controller
 public class HomeController {
 	
+	@Autowired
+	private IPersonaService personaService;
+	
 	@RequestMapping("/")
 	public ModelAndView handleRequest() throws Exception {
 		
-		System.out.println("Entra en la /");
+		/*System.out.println("Entra en la /");
 		//Cuando se tenga la lista Usuario
 		//List<User> listUsers = userService.list();
 		List<User> list = new ArrayList<User>();
@@ -53,8 +59,11 @@ public class HomeController {
 		}
 		
 		ModelAndView model = new ModelAndView("UserList");
-		model.addObject("list", list);
+		model.addObject("list", list);*/
 		
+		List<Persona> personas = personaService.list();
+		ModelAndView model = new ModelAndView("UserList");
+		model.addObject("lista", personas);
 		return model;
 		
 	}

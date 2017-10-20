@@ -30,15 +30,15 @@ public class Persona implements Serializable{
 	private String dni;
 	private Date fechaNacimiento;
 	
-	@OneToOne
+	/*@OneToOne
 	@JoinColumn(name = "persona_Id",referencedColumnName = "idempleados")
-	private Empleado empleado;
+	private Empleado empleado;*/
 	
-	@OneToMany (mappedBy="idPersona")
-	private List<Direccion> direcciones;
+	/*@OneToMany (mappedBy="idPersona")
+	private List<Direccion> direcciones;*/
 	
-	@OneToMany (mappedBy="idTelefonos")
-	private List<Telefono> telefonos;
+	/*@OneToMany (mappedBy="idTelefonos")
+	private List<Telefono> telefonos;*/
 	
 	
 	public Persona() {
@@ -82,12 +82,12 @@ public class Persona implements Serializable{
 	public void setFechaNacimiento(Date fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
 	}
-	public Empleado getEmpleado() {
+	/*public Empleado getEmpleado() {
 		return empleado;
 	}
 	public void setEmpleado(Empleado empleado) {
 		this.empleado = empleado;
-	}
+	}*/
 
 	
 	
