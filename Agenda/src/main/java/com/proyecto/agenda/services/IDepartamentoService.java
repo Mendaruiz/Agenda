@@ -1,5 +1,17 @@
 package com.proyecto.agenda.services;
 
+import java.util.List;
+
+import com.proyecto.agenda.model.Departamento;
+
 public interface IDepartamentoService {
+
+	public List<Departamento> list();
+	
+	public Departamento get(int iddepartamento);
+
+	public void saveOrUpdate(Departamento departamento);
+
+	public void delete(int iddepartamento);
 
 }
