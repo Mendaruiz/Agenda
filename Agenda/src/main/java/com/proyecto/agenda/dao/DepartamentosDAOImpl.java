@@ -29,11 +29,11 @@ public class DepartamentosDAOImpl implements IDepartamentosDAO {
 	@Transactional
 	public List<Departamento> list() {
 		// TODO Auto-generated method stub
-		List<Departamento> listUser = (List<Departamento>) sessionFactory.getCurrentSession()
+		List<Departamento> listDepartamento = (List<Departamento>) sessionFactory.getCurrentSession()
 				.createCriteria(Departamento.class)
 				.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
 
-		return listUser;
+		return listDepartamento;
 	}
 
 	@Override
