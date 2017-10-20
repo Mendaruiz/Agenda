@@ -38,8 +38,7 @@
 				<tr>
 					<td>${status.index + 1}</td>
 					<td>${persona.nombre}</td>
-					<td>${persona.apellido1}</td>
-					<td>${persona.apellido2}</td>
+					<td>${persona.apellido1} ${persona.apellido2}</td>
 					<td>${persona.dni}</td>
 				</tr>
 			</c:forEach>
