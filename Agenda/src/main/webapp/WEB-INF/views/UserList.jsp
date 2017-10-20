@@ -26,8 +26,8 @@
 		<tr>
 			<th>Nº</th>
 			<th>Usuario</th>
-			<th>Email</th>
-			<th>Acciones</th>
+			<th>Apellidos</th>
+			<th>DNI</th>
 			</tr>
 			<% 
 				//request.getAttribute("list");
@@ -38,6 +38,9 @@
 				<tr>
 					<td>${status.index + 1}</td>
 					<td>${persona.nombre}</td>
+					<td>${persona.apellido1}</td>
+					<td>${persona.apellido2}</td>
+					<td>${persona.dni}</td>
 				</tr>
 			</c:forEach>
 		</table>

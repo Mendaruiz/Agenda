@@ -23,7 +23,6 @@ public class PersonasDAOImpl implements IPersonasDAO {
 	}
 
 	public PersonasDAOImpl(SessionFactory sessionFactory) {
-		super();
 		this.sessionFactory = sessionFactory;
 	}
 

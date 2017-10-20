@@ -60,6 +60,8 @@ public class HomeController {
 		
 		ModelAndView model = new ModelAndView("UserList");
 		model.addObject("list", list);*/
+		System.out.println("Entra en la /");
+		
 		
 		List<Persona> personas = personaService.list();
 		ModelAndView model = new ModelAndView("UserList");

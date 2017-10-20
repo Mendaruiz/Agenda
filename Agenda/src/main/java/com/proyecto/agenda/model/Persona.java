@@ -40,12 +40,24 @@ public class Persona implements Serializable{
 	/*@OneToMany (mappedBy="idTelefonos")
 	private List<Telefono> telefonos;*/
 	
-	
 	public Persona() {
 		
 	}
 	
 	
+	
+	public Persona(int idpersonas, String nombre, String apellido1, String apellido2, String dni,
+			Date fechaNacimiento) {
+		this.idpersonas = idpersonas;
+		this.nombre = nombre;
+		this.apellido1 = apellido1;
+		this.apellido2 = apellido2;
+		this.dni = dni;
+		this.fechaNacimiento = fechaNacimiento;
+	}
+
+
+
 	public int getIdpersonas() {
 		return idpersonas;
 	}

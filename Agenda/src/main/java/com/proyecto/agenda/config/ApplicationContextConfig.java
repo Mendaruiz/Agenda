@@ -64,13 +64,11 @@ public class ApplicationContextConfig {
     @Autowired
     @Bean(name = "sessionFactory")
     public SessionFactory getSessionFactory(DataSource dataSource) {
+    	System.out.println("Entra en la session");
     	LocalSessionFactoryBuilder sessionBuilder = new LocalSessionFactoryBuilder(dataSource);
     	sessionBuilder.addProperties(getHibernateProperties());
     	sessionBuilder.addAnnotatedClasses(User.class);
-    	sessionBuilder.addAnnotatedClasses(Persona.class);
-    	
-    	
-    	
+    	sessionBuilder.addAnnotatedClasses(Persona.class);	
     	return sessionBuilder.buildSessionFactory();
     }
     
