@@ -5,7 +5,10 @@ import java.util.Date;
 import java.util.List;
 
 import javax.naming.Binding;
+import javax.security.auth.message.callback.PrivateKeyCallback.Request;
+import javax.servlet.http.HttpServletRequest;
 
+import org.hibernate.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -86,11 +89,15 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
-	public ModelAndView searchPersona() {
+	public ModelAndView searchPersona(HttpServletRequest request) {
 		System.out.println("/search");
-		ModelAndView model = new ModelAndView("UserForm");
-		model.addObject("persona", new Persona());
-		return model;		
+		int id = Integer.parseInt(request.getParameter("idpersona"));
+		List<Persona> lista = new ArrayList<>();
+		Persona persona = personaService.get(id);
+		lista.add(persona);
+		ModelAndView model = new ModelAndView("UserSearch");
+		model.addObject("lista", lista);
+		return model;	
 	}
 	
 	@RequestMapping(value = "/save", method = RequestMethod.GET)

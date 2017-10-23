@@ -22,9 +22,6 @@
 		<h3>
 			<a href="new">Clic para crear un NUEVO USUARIO</a>
 		</h3>
-		<h3>
-			<a href="search">Clic para buscar un Usuario</a>
-		</h3>
 
 		<table border="1">
 		<tr>
@@ -44,6 +41,11 @@
 				</tr>
 			</c:forEach>
 		</table>
+		
+		<form:form action="search" method="get" >
+			<input type="text" name="idpersona" id="idpersona"/>
+			<input type="submit" value="Buscar Agenda"></td>
+		</form:form>
 	</div>
 </body>
 </html>
