@@ -88,4 +88,12 @@ public class PersonasDAOImpl implements IPersonasDAO {
 		
 	}
 
+	@Override
+	public List<Persona> get(String nombre) {
+		
+		List<Persona> listPersona = (List<Persona>) sessionFactory.getCurrentSession().createCriteria(Persona.class).add(Restrictions.like("nombre", "%" + nombre + "%")).list();
+
+		return listPersona;
+	}
+
 }

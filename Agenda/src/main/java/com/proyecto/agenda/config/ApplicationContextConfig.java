@@ -15,6 +15,7 @@ import org.springframework.orm.hibernate4.LocalSessionFactoryBuilder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 
@@ -25,7 +26,7 @@ import com.proyecto.agenda.model.User;
 @Configuration
 @ComponentScan("com.proyecto.agenda")
 @EnableTransactionManagement
-public class ApplicationContextConfig {
+public class ApplicationContextConfig  extends WebMvcConfigurerAdapter{
 	
     @Bean(name = "viewResolver")
     public InternalResourceViewResolver getViewResolver() {
@@ -35,7 +36,7 @@ public class ApplicationContextConfig {
         return viewResolver;
     }
     
-
+    @Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 	    registry.addResourceHandler("/static/**").addResourceLocations("/static/");
 		///registry.addResourceHandler("/css/**").addResourceLocations("/static/css/");	    

@@ -39,4 +39,9 @@ public class PersonaServiceImpl implements IPersonaService {
 		
 	}
 
+	@Override
+	public List<Persona> get(String nombre) {
+		return personaDao.get(nombre);
+	}
+
 }

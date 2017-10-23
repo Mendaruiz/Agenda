@@ -41,7 +41,7 @@
 		</table>
 		
 		<form:form action="search" method="get" >
-			<input type="text" name="idpersona" id="idpersona"/>
+			<input type="text" name="nombre" id="nombre"/>
 			<input type="submit" value="Buscar Agenda"></td>
 		</form:form>
 	</div>

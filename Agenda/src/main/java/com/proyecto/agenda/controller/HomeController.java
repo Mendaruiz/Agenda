@@ -91,10 +91,9 @@ public class HomeController {
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
 	public ModelAndView searchPersona(HttpServletRequest request) {
 		System.out.println("/search");
-		int id = Integer.parseInt(request.getParameter("idpersona"));
+		String nombre = request.getParameter("nombre");
 		List<Persona> lista = new ArrayList<>();
-		Persona persona = personaService.get(id);
-		lista.add(persona);
+		lista = personaService.get(nombre);
 		ModelAndView model = new ModelAndView("UserSearch");
 		model.addObject("lista", lista);
 		return model;	
