@@ -1,6 +1,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 
 
@@ -21,6 +22,9 @@
 		<h3>
 			<a href="new">Clic para crear un NUEVO USUARIO</a>
 		</h3>
+		<h3>
+			<a href="search">Clic para buscar un Usuario</a>
+		</h3>
 
 		<table border="1">
 		<tr>
@@ -28,18 +32,15 @@
 			<th>Usuario</th>
 			<th>Apellidos</th>
 			<th>DNI</th>
+			<th>Fecha de Nacimiento</th>
 			</tr>
-			<% 
-				//request.getAttribute("list");
-			
-			
-			%>
 			<c:forEach var="persona" items="${lista}" varStatus="status">
 				<tr>
 					<td>${status.index + 1}</td>
 					<td>${persona.nombre}</td>
 					<td>${persona.apellido1} ${persona.apellido2}</td>
 					<td>${persona.dni}</td>
+					<td><fmt:formatDate pattern="dd-MM-yyyy" value="${persona.fechaNacimiento}" /></td>
 				</tr>
 			</c:forEach>
 		</table>

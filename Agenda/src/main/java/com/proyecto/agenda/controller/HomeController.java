@@ -1,11 +1,18 @@
 package com.proyecto.agenda.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+
+import javax.naming.Binding;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.proyecto.agenda.model.Persona;
@@ -68,6 +75,41 @@ public class HomeController {
 		model.addObject("lista", personas);
 		return model;
 		
+	}
+	
+	@RequestMapping(value = "/new", method = RequestMethod.GET)
+	public ModelAndView newPersona() {
+		System.out.println("/new");
+		ModelAndView model = new ModelAndView("UserForm");
+		model.addObject("persona", new Persona());
+		return model;		
+	}
+	
+	@RequestMapping(value = "/search", method = RequestMethod.GET)
+	public ModelAndView searchPersona() {
+		System.out.println("/search");
+		ModelAndView model = new ModelAndView("UserForm");
+		model.addObject("persona", new Persona());
+		return model;		
+	}
+	
+	@RequestMapping(value = "/save", method = RequestMethod.GET)
+	public ModelAndView saveUser(@ModelAttribute Persona persona ,BindingResult br) {
+		System.out.println("Entra");
+		if(br.hasErrors()){
+			System.out.println("Entra en el error");
+			//System.out.println(fecha.toString());
+			System.out.println(persona.toString());
+			ModelAndView model = new ModelAndView("UserForm");
+			model.addObject("persona", new Persona());
+			return model;
+		}
+		//System.out.println(fecha.toString());
+		System.out.println(persona.toString());
+		System.out.println("/save");
+		personaService.saveOrUpdate(persona);
+		System.out.println(persona.toString());
+		return new ModelAndView("redirect:/");
 	}
 	
 }

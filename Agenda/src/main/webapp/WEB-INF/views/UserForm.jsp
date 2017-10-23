@@ -1,6 +1,8 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page import="java.util.*" %>
+<%@ page import="java.text.SimpleDateFormat"%>
 <!DOCTYPE html>
 
 <html>
@@ -19,25 +21,55 @@
 		
         <link href="<c:url value='/static/css/custom.css' />" rel="stylesheet"></link>
 <title>FORMULARIO DE USUARIOS</title>
+	<script type="text/javascript">
+			jQuery(function($){
+			   $("#date").mask("99/99/9999",{placeholder:"dd/mm/yyyy"});
+			});
+	</script>
+
 </head>
 <body>
 	<div align="center">
 		<h1>FORMULARIO DE USUARIOS (add/edit)</h1>
 		<table>
-			<form:form action="save" method="post" modelAttribute="user">
-				<form:hidden path="id" />
+			<form:form action="save" method="get"  modelAttribute="persona">
+				<form:hidden path="idpersonas"/>
 				<tr>
-					<td>Usuario:</td>
-					<td><form:input path="username" /></td>
+					<td>Nombre:</td>
+					<td><form:input path="nombre" /></td>
 				</tr>
 				<tr>
-					<td>Email:</td>
-					<td><form:input path="email" /></td>
+					<td>Apellido1:</td>
+					<td><form:input path="apellido1" /></td>
 				</tr>
 				<tr>
-					<td>Password:</td>
-					<td><form:password path="password" /></td>
+					<td>Apellido2:</td>
+					<td><form:input path="apellido2" /></td>
 				</tr>
+				<tr>
+					<td>Dni:</td>
+					<td><form:input path="dni" /></td>
+				</tr>
+				 	
+				<tr>
+					<td>Fecha de nacimiento</td>
+					<td><form:input id="date" path="fechaNacimiento" pattern="(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))" 
+						title="Enter a date in this format YYYY-MM-DD"/></td>
+                </tr>
+				
+				<!--
+				<tr>
+					<%
+					   Date dNow = new Date();
+					   SimpleDateFormat ft = 
+					   new SimpleDateFormat ("yyyy/MM/dd");
+					   String currentDate = ft.format(dNow);
+					   System.out.println(currentDate);
+					%>
+					<td>Fecha de nacimiento</td>
+					<td><form:input type="date" id="fecha" path="fechaNacimiento" data-date-format="YYYY/MM/DD"/></td>
+				</tr>
+				-->
 				<tr>
 					<td colspan="2" align="center"><input type="submit"
 						value="Guardar Registro"></td>
