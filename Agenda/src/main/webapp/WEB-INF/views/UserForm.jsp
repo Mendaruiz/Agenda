@@ -18,110 +18,94 @@
         <link href="static/css/style.css" rel="stylesheet" /> 
 			
 <title>FORMULARIO DE USUARIOS</title>
-	<script type="text/javascript">
-			jQuery(function($){
-			   $("#date").mask("99/99/9999",{placeholder:"dd/mm/yyyy"});
-			});
-	</script>
 
 </head>
 <body>
 	<div align="center">
-		<h1>FORMULARIO DE USUARIOS (add/edit)</h1>
-		<table>
-			<form:form action="save" method="get"  modelAttribute="persona">
-				<form:hidden path="idpersonas"/>
-				<tr>
-					<td>Nombre:</td>
-					<td><form:input path="nombre" /></td>
-				</tr>
-				<tr>
-					<td>Apellido1:</td>
-					<td><form:input path="apellido1" /></td>
-				</tr> 
-				<tr>
-					<td>Apellido2:</td>
-					<td><form:input path="apellido2" /></td>
-				</tr>
-				<tr>
-					<td>Dni:</td>
-					<td><form:input path="dni" /></td>
-				</tr>
-				 	
-				<tr>
-					<td>Fecha de nacimiento</td>
-					<td><form:input id="date" path="fechaNacimiento" title="Enter a date in this format DD/MM/YYYY"/></td>
-                </tr>
-				
-				<!--
-				<tr>
-					<%
-					   Date dNow = new Date();
-					   SimpleDateFormat ft = 
-					   new SimpleDateFormat ("yyyy/MM/dd");
-					   String currentDate = ft.format(dNow);
-					   System.out.println(currentDate);
-					%>
-					<td>Fecha de nacimiento</td>
-					<td><form:input type="date" id="fecha" path="fechaNacimiento" data-date-format="YYYY/MM/DD"/></td>
-				</tr>
-				-->
-				<tr>
-					<td colspan="2" align="center"><input type="submit"
-						value="Guardar Registro"></td>
-				</tr>
-			</form:form>
-		</table>
-		
-		
-		<div class="container-fluid">
+		<h1>FORMULARIO DE USUARIOS </h1>	
+	</div>
+			
+	<div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
-			<h3 class="text-center">
-				Añadir Usuario
-			</h3>
+			
+			<nav class="navbar navbar-default navbar-static-top" role="navigation">
+				<div class="navbar-header">
+					 
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+						 <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+					</button> <a class="navbar-brand" href="/Agenda/">Agenda</a>
+				</div>
+				
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav">
+						<li >
+							<a href="new">Añadir Usuario</a>
+						</li>
+						<li>
+							<a href="telefonos">Telefonos</a>
+						</li>
+					</ul>
+					<form:form class="navbar-form navbar-left" action="search" method="get">
+						<div class="form-group">
+							<input type="text" class="form-control" name="nombre">
+						</div> 
+						<button type="submit" class="btn btn-default">
+							Buscar
+						</button>
+					</form:form>
+					
+				</div>
+			</nav>
+			</div>
+			</div>
+			</div>
+		
+	<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-6 col-md-offset-3" >
 			<form:form action="save" method="get"  modelAttribute="persona">
 				<form:hidden path="idpersonas"/>
 				<div class="form-group">
 					<label>
 						Nombre
 					</label>
-					<form:input path="nombre" />
+					<form:input path="nombre" class="form-control"/>
 				</div>
 				<div class="form-group">
 					<label>
-						Apellido1
+						1º Apellido
 					</label>
-					<form:input path="apellido1" />
+					<form:input path="apellido1" class="form-control"/>
 				</div>
 				<div class="form-group">
 					<label>
-						Apellido2
+						2º Apellido
 					</label>
-					<form:input path="apellido2" />
+					<form:input path="apellido2" class="form-control"/>
 				</div>
 				<div class="form-group">
 					<label>
 						Dni
 					</label>
-					<form:input path="dni" />
+					<form:input path="dni" class="form-control"/>
 				</div>
 				<div class="form-group">
 					<label>
 						Fecha de Nacimiento
 					</label>
-					<form:input path="fechaNacimiento" />
+					<form:input path="fechaNacimiento" class="form-control"/>
 				</div>
 				<button type="submit" class="btn btn-default">
-					Submit
+					Guardar Registro
 				</button>
 			</form:form>
 		</div>
 	</div>
 </div>
+
 		
 		
-	</div>
 		<script src="static/js/jquery.min.js"></script>
 	    <script src="static/js/bootstrap.min.js"></script>
 	    <script src="static/js/scripts.js"></script>

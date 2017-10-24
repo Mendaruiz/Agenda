@@ -14,15 +14,15 @@
         <spring:url value="static/css/custom.css" var="custom"/>
         <link href="${custom}" rel="stylesheet" /> 
         <link href="static/css/bootstrap.min.css" rel="stylesheet" /> 
-        <link href="static/css/style.css" rel="stylesheet" /> 
-        
-<title>LISTADO DE TELEFONOS</title>
+        <link href="static/css/style.css" rel="stylesheet" />
+
+<title>DETALLES DE USUARIO</title>
 </head>
 <body>
 	<div align="center">
-		<h1>LISTADO DE TELEFONOS</h1>
-	
+		<h1>Usuario</h1>
 	</div>
+	
 	<div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
@@ -49,7 +49,7 @@
 							<input type="text" class="form-control" name="nombre">
 						</div> 
 						<button type="submit" class="btn btn-default">
-							Buscar
+							Buscar Datos
 						</button>
 					</form:form>
 					
@@ -59,23 +59,51 @@
 			<table class="table table-hover">
 				<thead>
 					<tr>
-						<th>Persona</th>
-						<th>telefono</th>
+						<th>
+							Nombre
+						</th>
+						<th>
+							Apellidos 
+						</th>
+						<th>
+							DNI
+						</th>
+						<th>
+							Fecha de Nacimiento
+						</th>
+						<th>
+							Telefonos
+						</th>
+						<th>
+							Direcciones
+						</th>
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach var="telefono" items="${telefonos}">
 						<tr class="success">
-							<td>${telefono.persona.nombre} ${telefono.persona.apellido1} ${telefono.persona.apellido2}</td>
-							<td>${telefono.telefono}</td>
-							
+							<td>${persona.nombre}</td>
+							<td>${persona.apellido1} ${persona.apellido2}</td>
+							<td>${persona.dni}</td>
+							<td><fmt:formatDate pattern="dd-MM-yyyy" value="${persona.fechaNacimiento}" /></td>
+							<td>
+								<c:forEach var="telefono" items="${persona.telefonos}">
+									<p>${telefono.telefono}</p>
+								</c:forEach>
+							</td>
+							<td>
+								<c:forEach var="direccion" items="${persona.direcciones}">
+									<p>${direccion.direccion}</p>
+								</c:forEach>
+							</td>
 						</tr>
-					</c:forEach>
 				</tbody>
 			</table>
 		</div>
 	</div>
 </div>
+	
+	
+	
 	
 	
 </body>

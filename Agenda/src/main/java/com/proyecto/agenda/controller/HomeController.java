@@ -18,9 +18,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.proyecto.agenda.model.Direccion;
 import com.proyecto.agenda.model.Persona;
 import com.proyecto.agenda.model.Telefono;
 import com.proyecto.agenda.model.User;
+import com.proyecto.agenda.services.IDireccionService;
 import com.proyecto.agenda.services.IPersonaService;
 import com.proyecto.agenda.services.ITelefonoService;
 
@@ -31,50 +33,12 @@ public class HomeController {
 	private IPersonaService personaService;
 	@Autowired
 	private ITelefonoService telefonoService;
+	@Autowired
+	private IDireccionService direccionService;
 	
 	@RequestMapping("/")
 	public ModelAndView handleRequest() throws Exception {
-		
-		/*System.out.println("Entra en la /");
-		//Cuando se tenga la lista Usuario
-		//List<User> listUsers = userService.list();
-		List<User> list = new ArrayList<User>();
-		
-		User u1 = new User();
-		u1.setUsername("prueba1");
-		u1.setPassword("prueba1");
-		u1.setEmail("prueba1@hotmail");
-		System.out.println(u1.toString());
-		
-		
-		User u2 = new User();
-		u2.setUsername("prueba2");
-		u2.setPassword("prueba2");
-		u2.setEmail("prueba2@hotmail");
-		
-		System.out.println(u2.toString());
-		
-		User u3 = new User();
-		u3.setUsername("prueba3");
-		u3.setPassword("prueba3");
-		u3.setEmail("prueba3@hotmail");
-		
-		System.out.println(u3.toString());
-		
-		list.add(u1);
-		list.add(u2);
-		list.add(u3);
-		
-		//Comprobar la lista
-		for(int i= 0; i < list.size(); i++){
-			System.out.println("Entra for");
-			System.out.println(i);
-			System.out.println(list.get(i).toString());
-		}
-		
-		ModelAndView model = new ModelAndView("UserList");
-		model.addObject("list", list);*/
-		
+
 		System.out.println("Entra en la /");
 		
 		
@@ -104,8 +68,35 @@ public class HomeController {
 		List<Telefono> telefonos = telefonoService.list();
 		model.addObject("telefonos", telefonos);
 		return model;
-		
 	}
+	
+	@RequestMapping(value="/delete", method=RequestMethod.GET)
+	public ModelAndView deletePersona(HttpServletRequest request){
+		int personaId = Integer.parseInt(request.getParameter("id"));
+		personaService.delete(personaId);
+		return new ModelAndView("redirect:/");
+	}
+	
+	@RequestMapping(value = "/detalle", method = RequestMethod.GET)
+	public ModelAndView detailPerson(HttpServletRequest request) {
+		System.out.println("/detalle");
+		int id = Integer.parseInt(request.getParameter("idpersona"));
+		System.out.println(id);
+		Persona persona = personaService.get(id);
+		ModelAndView model = new ModelAndView("UserDetalles");
+		model.addObject("persona", persona);
+		return model;	
+	}
+	
+	@RequestMapping(value = "/direcciones", method = RequestMethod.GET)
+	public ModelAndView listarDirecciones(){
+		System.out.println("/direcciones");
+		ModelAndView model = new ModelAndView("DirList");
+		List<Direccion> direcciones = direccionService.list();
+		model.addObject("direcciones", direcciones);
+		return model;
+	}
+	
 	
 	@RequestMapping(value = "/new", method = RequestMethod.GET)
 	public ModelAndView newPersona() {
@@ -128,20 +119,14 @@ public class HomeController {
 	
 	@RequestMapping(value = "/save", method = RequestMethod.GET)
 	public ModelAndView saveUser(@ModelAttribute Persona persona ,BindingResult br) {
-		System.out.println("Entra");
 		if(br.hasErrors()){
 			System.out.println("Entra en el error");
-			//System.out.println(fecha.toString());
 			System.out.println(persona.toString());
 			ModelAndView model = new ModelAndView("UserForm");
 			model.addObject("persona", new Persona());
 			return model;
 		}
-		//System.out.println(fecha.toString());
-		System.out.println(persona.toString());
-		System.out.println("/save");
 		personaService.saveOrUpdate(persona);
-		System.out.println(persona.toString());
 		return new ModelAndView("redirect:/");
 	}
 	

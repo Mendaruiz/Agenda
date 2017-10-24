@@ -26,6 +26,7 @@ public class TelefonoDAOImpl implements ITelefonosDAO {
 		this.sessionFactory = sessionFactory;
 	}
 	
+	@Override
 	@Transactional
 	public void delete (int idtelefonos){
 		Telefono telefonoDelete = new Telefono();
@@ -33,6 +34,7 @@ public class TelefonoDAOImpl implements ITelefonosDAO {
 		sessionFactory.getCurrentSession().delete(telefonoDelete);
 	}
 	
+	@Override
 	@Transactional
 	public Telefono get(int idtelefonos){
 		
@@ -66,6 +68,7 @@ public class TelefonoDAOImpl implements ITelefonosDAO {
 		sessionFactory.getCurrentSession().saveOrUpdate(telefono);
 	}
 	
+	@Override
 	@Transactional
 	public List<Telefono> getTelPer(int idpersona){
 		

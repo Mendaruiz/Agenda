@@ -16,6 +16,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.FetchMode;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.IndexColumn;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -37,8 +40,8 @@ public class Persona implements Serializable{
 	@JoinColumn(name = "persona_Id",referencedColumnName = "idempleados")
 	private Empleado empleado;*/
 	
-	/*@OneToMany (mappedBy="idPersona")
-	private List<Direccion> direcciones;*/
+	@OneToMany (mappedBy="iddirecciones")
+	private List<Direccion> direcciones;
 	
 	@OneToMany (mappedBy="telefono")
 	private List<Telefono> telefonos;
@@ -49,7 +52,7 @@ public class Persona implements Serializable{
 	
 	
 	public Persona(int idpersonas, String nombre, String apellido1, String apellido2, String dni,
-			Date fechaNacimiento,List<Telefono> telefonos) {
+			Date fechaNacimiento,List<Telefono> telefonos,List<Direccion> direcciones) {
 		this.idpersonas = idpersonas;
 		this.nombre = nombre;
 		this.apellido1 = apellido1;
@@ -57,6 +60,7 @@ public class Persona implements Serializable{
 		this.dni = dni;
 		this.fechaNacimiento = fechaNacimiento;
 		this.telefonos = telefonos;
+		this.direcciones = direcciones;
 	}
 
 
@@ -100,7 +104,8 @@ public class Persona implements Serializable{
 		this.fechaNacimiento = fechaNacimiento;
 	}
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "persona")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "persona")
+	@IndexColumn(name="idtelefonos")
 	public List<Telefono> getTelefonos() {
 		return telefonos;
 	}
@@ -108,21 +113,27 @@ public class Persona implements Serializable{
 	public void setTelefonos(List<Telefono> telefonos) {
 		this.telefonos = telefonos;
 	}
+	
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "persona")
+	@IndexColumn(name="iddirecciones")
+	public List<Direccion> getDirecciones() {
+		return direcciones;
+	}
 
 
+	public void setDirecciones(List<Direccion> direcciones) {
+		this.direcciones = direcciones;
+	}
+	 
+	/*
 	@Override
 	public String toString() {
 		return "Persona [idpersonas=" + idpersonas + ", nombre=" + nombre + ", apellido1=" + apellido1 + ", apellido2="
 				+ apellido2 + ", dni=" + dni + ", fechaNacimiento=" + fechaNacimiento + ", telefonos=" + telefonos
 				+ "]";
 	}
+	*/
 	
-	/*public Empleado getEmpleado() {
-	return empleado;
-	}
-	public void setEmpleado(Empleado empleado) {
-		this.empleado = empleado;
-	}*/
 
 	
 	

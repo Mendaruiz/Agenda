@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Proxy;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -20,6 +21,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name= "TELEFONOS")
+@Proxy(lazy = false)
 public class Telefono {
 	
 	private int idtelefonos;
@@ -50,7 +52,7 @@ public class Telefono {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "idPersona")*/
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "idPersona")
 	public Persona getPersona() {
 		return persona;
@@ -67,12 +69,13 @@ public class Telefono {
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
 	}
-
+	
+	/*
 	@Override
 	public String toString() {
 		return "Telefono [idtelefonos=" + idtelefonos + ", persona=" + persona + ", telefono=" + telefono + "]";
 	}
-	
+	*/
 	
 	
 	

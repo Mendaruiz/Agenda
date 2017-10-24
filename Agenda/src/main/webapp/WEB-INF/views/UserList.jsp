@@ -60,9 +60,6 @@
 				<thead>
 					<tr>
 						<th>
-							N
-						</th>
-						<th>
 							Nombre
 						</th>
 						<th>
@@ -74,17 +71,35 @@
 						<th>
 							Fecha de Nacimiento
 						</th>
+						<th>
+							Telefonos
+						</th>
+						<th>
+							Direcciones
+						</th>
+						<th>
+							Eliminar
+						</th>
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach var="persona" items="${lista}" varStatus="status">
+					<c:forEach var="persona" items="${lista}">
 						<tr class="success">
-							<td>${status.index + 1}</td>
-							<td>${persona.nombre}</td>
+							<td><a href="detalle?idpersona=${persona.idpersonas}">${persona.nombre}</a></td>
 							<td>${persona.apellido1} ${persona.apellido2}</td>
 							<td>${persona.dni}</td>
 							<td><fmt:formatDate pattern="dd-MM-yyyy" value="${persona.fechaNacimiento}" /></td>
-							
+							<td>
+								<c:forEach var="telefono" items="${persona.telefonos}">
+									<p>${telefono.telefono}</p>
+								</c:forEach>
+							</td>
+							<td>
+								<c:forEach var="direccion" items="${persona.direcciones}">
+									<p>${direccion.direccion}</p>
+								</c:forEach>
+							</td>
+							<td><a href="delete?id=${persona.idpersonas}">Eliminar</a></td>
 						</tr>
 					</c:forEach>
 				</tbody>
