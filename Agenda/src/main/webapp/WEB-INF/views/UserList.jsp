@@ -22,6 +22,9 @@
 		<h3>
 			<a href="new">Clic para crear un NUEVO USUARIO</a>
 		</h3>
+		<h3>
+			<a href="telefonos">Telefonos</a>
+		</h3>
 
 		<table border="1">
 		<tr>
@@ -30,6 +33,7 @@
 			<th>Apellidos</th>
 			<th>DNI</th>
 			<th>Fecha de Nacimiento</th>
+			<th>Telefono </th>
 			</tr>
 			<c:forEach var="persona" items="${lista}" varStatus="status">
 				<tr>
@@ -38,6 +42,7 @@
 					<td>${persona.apellido1} ${persona.apellido2}</td>
 					<td>${persona.dni}</td>
 					<td><fmt:formatDate pattern="dd-MM-yyyy" value="${persona.fechaNacimiento}" /></td>
+					
 				</tr>
 			</c:forEach>
 		</table>

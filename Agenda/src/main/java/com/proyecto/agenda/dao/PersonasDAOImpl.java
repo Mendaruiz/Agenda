@@ -1,5 +1,6 @@
 package com.proyecto.agenda.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -12,6 +13,9 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.proyecto.agenda.model.Persona;
+import com.proyecto.agenda.model.Telefono;
+import com.proyecto.agenda.services.ITelefonoService;
+import com.proyecto.agenda.services.TelefonoServiceImpl;
 
 @Repository
 public class PersonasDAOImpl implements IPersonasDAO {
@@ -34,7 +38,6 @@ public class PersonasDAOImpl implements IPersonasDAO {
 		List<Persona> listPersona = (List<Persona>) sessionFactory.getCurrentSession()
 				.createCriteria(Persona.class)
 				.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
-
 		return listPersona;
 	}
 

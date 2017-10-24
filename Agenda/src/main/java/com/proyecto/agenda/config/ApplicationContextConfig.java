@@ -20,6 +20,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 
 import com.proyecto.agenda.model.Persona;
+import com.proyecto.agenda.model.Telefono;
 import com.proyecto.agenda.model.User;
 
 @EnableWebMvc
@@ -71,6 +72,7 @@ public class ApplicationContextConfig  extends WebMvcConfigurerAdapter{
     	sessionBuilder.addProperties(getHibernateProperties());
     	sessionBuilder.addAnnotatedClasses(User.class);
     	sessionBuilder.addAnnotatedClasses(Persona.class);	
+    	sessionBuilder.addAnnotatedClasses(Telefono.class);
     	return sessionBuilder.buildSessionFactory();
     }
     
