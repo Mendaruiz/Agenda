@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -39,8 +40,8 @@ public class Persona implements Serializable{
 	/*@OneToMany (mappedBy="idPersona")
 	private List<Direccion> direcciones;*/
 	
-	/*@OneToMany (mappedBy="idTelefonos")
-	private List<Telefono> telefonos;*/
+	@OneToMany (mappedBy="telefono")
+	private List<Telefono> telefonos;
 	
 	public Persona() {
 		
@@ -48,13 +49,14 @@ public class Persona implements Serializable{
 	
 	
 	public Persona(int idpersonas, String nombre, String apellido1, String apellido2, String dni,
-			Date fechaNacimiento) {
+			Date fechaNacimiento,List<Telefono> telefonos) {
 		this.idpersonas = idpersonas;
 		this.nombre = nombre;
 		this.apellido1 = apellido1;
 		this.apellido2 = apellido2;
 		this.dni = dni;
 		this.fechaNacimiento = fechaNacimiento;
+		this.telefonos = telefonos;
 	}
 
 
@@ -97,22 +99,31 @@ public class Persona implements Serializable{
 	public void setFechaNacimiento(Date fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
 	}
-	/*public Empleado getEmpleado() {
-		return empleado;
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "persona")
+	public List<Telefono> getTelefonos() {
+		return telefonos;
 	}
-	public void setEmpleado(Empleado empleado) {
-		this.empleado = empleado;
-	}*/
 
+	public void setTelefonos(List<Telefono> telefonos) {
+		this.telefonos = telefonos;
+	}
 
 
 	@Override
 	public String toString() {
 		return "Persona [idpersonas=" + idpersonas + ", nombre=" + nombre + ", apellido1=" + apellido1 + ", apellido2="
-				+ apellido2 + ", dni=" + dni + ", fechaNacimiento=" + fechaNacimiento + "]";
+				+ apellido2 + ", dni=" + dni + ", fechaNacimiento=" + fechaNacimiento + ", telefonos=" + telefonos
+				+ "]";
 	}
-
 	
+	/*public Empleado getEmpleado() {
+	return empleado;
+	}
+	public void setEmpleado(Empleado empleado) {
+		this.empleado = empleado;
+	}*/
+
 	
 	
 }

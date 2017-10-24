@@ -19,14 +19,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.proyecto.agenda.model.Persona;
+import com.proyecto.agenda.model.Telefono;
 import com.proyecto.agenda.model.User;
 import com.proyecto.agenda.services.IPersonaService;
+import com.proyecto.agenda.services.ITelefonoService;
 
 @Controller
 public class HomeController {
 	
 	@Autowired
 	private IPersonaService personaService;
+	private ITelefonoService telefonoService;
 	
 	@RequestMapping("/")
 	public ModelAndView handleRequest() throws Exception {
@@ -70,12 +73,31 @@ public class HomeController {
 		
 		ModelAndView model = new ModelAndView("UserList");
 		model.addObject("list", list);*/
+		
 		System.out.println("Entra en la /");
 		
 		
 		List<Persona> personas = personaService.list();
 		ModelAndView model = new ModelAndView("UserList");
-		model.addObject("lista", personas);
+		
+		 /*
+		for(int i = 0; i < personas.size(); i ++){
+			List<Telefono> telefonos = new ArrayList<>();
+			telefonos = telefonoService.getTelPer(personas.get(i).getIdpersonas());
+			personas.get(i).setTelefonos(telefonos);
+		}
+		*/
+		model.addObject("lista", personas);	
+		return model;
+		
+	}
+	
+	@RequestMapping(value = "/telefonos", method = RequestMethod.GET)
+	public ModelAndView listarTelfonos(){
+		System.out.println("/telefonos");
+		ModelAndView model = new ModelAndView("TelList");
+		List<Telefono> telefonos = telefonoService.list();
+		model.addObject("telefonos", telefonos);
 		return model;
 		
 	}
