@@ -13,22 +13,20 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBuilder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
-import com.proyecto.agenda.model.Categoria;
-import com.proyecto.agenda.model.Departamento;
-import com.proyecto.agenda.model.Direccion;
-import com.proyecto.agenda.model.Empleado;
+
 import com.proyecto.agenda.model.Persona;
-import com.proyecto.agenda.model.Telefono;
 import com.proyecto.agenda.model.User;
 
-
+@EnableWebMvc
 @Configuration
 @ComponentScan("com.proyecto.agenda")
 @EnableTransactionManagement
-public class ApplicationContextConfig {
+public class ApplicationContextConfig  extends WebMvcConfigurerAdapter{
 	
     @Bean(name = "viewResolver")
     public InternalResourceViewResolver getViewResolver() {
@@ -38,7 +36,7 @@ public class ApplicationContextConfig {
         return viewResolver;
     }
     
-
+    @Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 	    registry.addResourceHandler("/static/**").addResourceLocations("/static/");
 		///registry.addResourceHandler("/css/**").addResourceLocations("/static/css/");	    
@@ -68,18 +66,11 @@ public class ApplicationContextConfig {
     @Autowired
     @Bean(name = "sessionFactory")
     public SessionFactory getSessionFactory(DataSource dataSource) {
+    	System.out.println("Entra en la session");
     	LocalSessionFactoryBuilder sessionBuilder = new LocalSessionFactoryBuilder(dataSource);
     	sessionBuilder.addProperties(getHibernateProperties());
     	sessionBuilder.addAnnotatedClasses(User.class);
-    	sessionBuilder.addAnnotatedClasses(Categoria.class);
-    	sessionBuilder.addAnnotatedClasses(Departamento.class);
-    	sessionBuilder.addAnnotatedClasses(Direccion.class);
-    	sessionBuilder.addAnnotatedClasses(Empleado.class);
-    	sessionBuilder.addAnnotatedClasses(Persona.class);
-    	sessionBuilder.addAnnotatedClasses(Telefono.class);
-    	
-    	//Falta añadir todas las clases de model
-    	
+    	sessionBuilder.addAnnotatedClasses(Persona.class);	
     	return sessionBuilder.buildSessionFactory();
     }
     

@@ -2,11 +2,16 @@ package com.proyecto.agenda.services;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.proyecto.agenda.dao.IPersonasDAO;
 import com.proyecto.agenda.model.Persona;
 
+@Service
+@Transactional
 public class PersonaServiceImpl implements IPersonaService {
 	
 	@Autowired
@@ -32,6 +37,11 @@ public class PersonaServiceImpl implements IPersonaService {
 	public void delete(int id) {
 		personaDao.delete(id);
 		
+	}
+
+	@Override
+	public List<Persona> get(String nombre) {
+		return personaDao.get(nombre);
 	}
 
 }

@@ -1,6 +1,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 
 
@@ -26,25 +27,25 @@
 		<tr>
 			<th>Nº</th>
 			<th>Usuario</th>
-			<th>Email</th>
-			<th>Acciones</th>
+			<th>Apellidos</th>
+			<th>DNI</th>
+			<th>Fecha de Nacimiento</th>
 			</tr>
-			<% 
-				//request.getAttribute("list");
-			
-			
-			%>
-			<c:forEach var="user" items="${list}" varStatus="status">
+			<c:forEach var="persona" items="${lista}" varStatus="status">
 				<tr>
 					<td>${status.index + 1}</td>
-					<td>${user.username}</td>
-					<td>${user.email}</td>
-					<td><a href="edit?id=${user.id}">Modificar</a>
-						&nbsp;&nbsp;&nbsp;&nbsp; <a href="delete?id=${user.id}">Eliminar</a>
-					</td>
+					<td>${persona.nombre}</td>
+					<td>${persona.apellido1} ${persona.apellido2}</td>
+					<td>${persona.dni}</td>
+					<td><fmt:formatDate pattern="dd-MM-yyyy" value="${persona.fechaNacimiento}" /></td>
 				</tr>
 			</c:forEach>
 		</table>
+		
+		<form:form action="search" method="get" >
+			<input type="text" name="nombre" id="nombre"/>
+			<input type="submit" value="Buscar Agenda"></td>
+		</form:form>
 	</div>
 </body>
 </html>

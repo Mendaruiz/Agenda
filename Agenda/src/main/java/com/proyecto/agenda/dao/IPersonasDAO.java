@@ -10,6 +10,8 @@ public interface IPersonasDAO {
 	
 	public Persona get(int id);
 	
+	public List<Persona> get(String nombre);
+	
 	public void saveOrUpdate(Persona persona);
 	
 	public void delete(int id);

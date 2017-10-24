@@ -15,37 +15,52 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 @Table(name="PERSONAS")
 public class Persona implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="IDPERSONAS")
+	
 	private int idpersonas;
 	private String nombre;
 	private String apellido1;
 	private String apellido2;
 	private String dni;
+	//Si en el formulario es un texto se pone el pattern="dd/MM/yyyy"
+	@DateTimeFormat(pattern="dd/MM/yyyy")
 	private Date fechaNacimiento;
 	
-	@OneToOne
+	/*@OneToOne
 	@JoinColumn(name = "persona_Id",referencedColumnName = "idempleados")
-	private Empleado empleado;
+	private Empleado empleado;*/
 	
-	@OneToMany (mappedBy="idPersona")
-	private List<Direccion> direcciones;
+	/*@OneToMany (mappedBy="idPersona")
+	private List<Direccion> direcciones;*/
 	
-	@OneToMany (mappedBy="idTelefonos")
-	private List<Telefono> telefonos;
-	
+	/*@OneToMany (mappedBy="idTelefonos")
+	private List<Telefono> telefonos;*/
 	
 	public Persona() {
 		
 	}
 	
 	
+	public Persona(int idpersonas, String nombre, String apellido1, String apellido2, String dni,
+			Date fechaNacimiento) {
+		this.idpersonas = idpersonas;
+		this.nombre = nombre;
+		this.apellido1 = apellido1;
+		this.apellido2 = apellido2;
+		this.dni = dni;
+		this.fechaNacimiento = fechaNacimiento;
+	}
+
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="IDPERSONAS")
 	public int getIdpersonas() {
 		return idpersonas;
 	}
@@ -82,11 +97,19 @@ public class Persona implements Serializable{
 	public void setFechaNacimiento(Date fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
 	}
-	public Empleado getEmpleado() {
+	/*public Empleado getEmpleado() {
 		return empleado;
 	}
 	public void setEmpleado(Empleado empleado) {
 		this.empleado = empleado;
+	}*/
+
+
+
+	@Override
+	public String toString() {
+		return "Persona [idpersonas=" + idpersonas + ", nombre=" + nombre + ", apellido1=" + apellido1 + ", apellido2="
+				+ apellido2 + ", dni=" + dni + ", fechaNacimiento=" + fechaNacimiento + "]";
 	}
 
 	
