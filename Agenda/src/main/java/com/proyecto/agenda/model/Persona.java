@@ -101,6 +101,13 @@ public class Persona implements Serializable{
 		this.empleado = empleado;
 	}*/
 
+
+
+	public boolean isEmpty() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 	
 	
 	

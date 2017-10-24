@@ -21,7 +21,7 @@
 		<h3>
 			<a href="new">Clic para crear un NUEVO USUARIO</a>
 		</h3>
-
+		
 		<table border="1">
 		<tr>
 			<th>Nº</th>
@@ -37,7 +37,7 @@
 			<c:forEach var="persona" items="${lista}" varStatus="status">
 				<tr>
 					<td>${status.index + 1}</td>
-					<td>${persona.nombre}</td>
+					<td><a href="edit?idpersonas=${persona.idpersonas}">${persona.nombre}</a></td>
 					<td>${persona.apellido1} ${persona.apellido2}</td>
 					<td>${persona.dni}</td>
 				</tr>

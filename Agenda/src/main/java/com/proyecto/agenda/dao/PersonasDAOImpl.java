@@ -2,10 +2,12 @@ package com.proyecto.agenda.dao;
 
 import java.util.List;
 
+import org.hibernate.Session;
 
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -39,18 +41,13 @@ public class PersonasDAOImpl implements IPersonasDAO {
 
 	@Override
 	@Transactional
-	public Persona get(int id) {
-		String hql = "from personas where id=" + id;
-		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+	public Persona get(int idpersonas) {
 		
-		@SuppressWarnings("unchecked")
-		List<Persona> listUser = (List<Persona>) query.list();
-		
-		if (listUser != null && !listUser.isEmpty()) {
-			return listUser.get(0);
-		}
-		
-		return null;
+		Criteria criteria =  sessionFactory.getCurrentSession().createCriteria(Persona.class).add(Restrictions.eq("idpersonas", idpersonas));
+		Persona p1 = (Persona) criteria.uniqueResult();
+		System.out.println(p1);
+
+		return p1;
 	}
 
 	@Override

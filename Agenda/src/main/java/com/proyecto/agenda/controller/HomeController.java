@@ -3,9 +3,12 @@ package com.proyecto.agenda.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.proyecto.agenda.model.Persona;
@@ -60,6 +63,7 @@ public class HomeController {
 		
 		ModelAndView model = new ModelAndView("UserList");
 		model.addObject("list", list);*/
+		
 		System.out.println("Entra en la /");
 		
 		
@@ -68,6 +72,15 @@ public class HomeController {
 		model.addObject("lista", personas);
 		return model;
 		
+	}
+	
+	@RequestMapping(value = "/edit", method = RequestMethod.GET)
+	public ModelAndView editPersona(HttpServletRequest request) {
+		int personaId = Integer.parseInt(request.getParameter("idpersonas"));
+		Persona persona = personaService.get(personaId);
+		ModelAndView model = new ModelAndView("UserDetalles");
+		model.addObject("persona", persona);
+		return model;		
 	}
 	
 }
