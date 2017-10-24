@@ -41,7 +41,7 @@
 				<tr>
 					<td>Apellido1:</td>
 					<td><form:input path="apellido1" /></td>
-				</tr>
+				</tr> 
 				<tr>
 					<td>Apellido2:</td>
 					<td><form:input path="apellido2" /></td>
