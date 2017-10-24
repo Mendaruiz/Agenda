@@ -29,6 +29,7 @@ public class HomeController {
 	
 	@Autowired
 	private IPersonaService personaService;
+	@Autowired
 	private ITelefonoService telefonoService;
 	
 	@RequestMapping("/")
@@ -80,17 +81,21 @@ public class HomeController {
 		List<Persona> personas = personaService.list();
 		ModelAndView model = new ModelAndView("UserList");
 		
-		 /*
+		/* 
 		for(int i = 0; i < personas.size(); i ++){
-			List<Telefono> telefonos = new ArrayList<>();
-			telefonos = telefonoService.getTelPer(personas.get(i).getIdpersonas());
-			personas.get(i).setTelefonos(telefonos);
-		}
-		*/
+			System.out.println(personas.get(i).toString());
+		}*/
+		
 		model.addObject("lista", personas);	
 		return model;
 		
 	}
+	/*
+	@RequestMapping(value ="/", method = RequestMethod.GET)
+	public ModelAndView principal(){
+		ModelAndView model = new ModelAndView("/");
+	}
+	*/
 	
 	@RequestMapping(value = "/telefonos", method = RequestMethod.GET)
 	public ModelAndView listarTelfonos(){

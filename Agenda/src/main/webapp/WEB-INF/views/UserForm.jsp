@@ -10,16 +10,13 @@
 <meta charset="UTF-8">
 
 
-		<spring:url value="/resources/css/bootstrap.css" var="estilos1" />
-		<link href="${estilos1}" rel="stylesheet" />
-		
-		<spring:url value="/resources/css/custom.css" var="estilos3" />
-		<link href="${estilos3}" rel="stylesheet" />		
-	
-		<spring:url value="css/bootstrap.css" var="estilos2" />
-		<link href="${estilos2}" rel="stylesheet" />	
-		
-        <link href="<c:url value='/static/css/custom.css' />" rel="stylesheet"></link>
+		<spring:url value="static/css/bootstrap.css" var="bootstrap"/>
+        <link href="${bootstrap}" rel="stylesheet" />
+        <spring:url value="static/css/custom.css" var="custom"/>
+        <link href="${custom}" rel="stylesheet" /> 
+        <link href="static/css/bootstrap.min.css" rel="stylesheet" /> 
+        <link href="static/css/style.css" rel="stylesheet" /> 
+			
 <title>FORMULARIO DE USUARIOS</title>
 	<script type="text/javascript">
 			jQuery(function($){
@@ -75,7 +72,58 @@
 				</tr>
 			</form:form>
 		</table>
+		
+		
+		<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+			<h3 class="text-center">
+				Añadir Usuario
+			</h3>
+			<form:form action="save" method="get"  modelAttribute="persona">
+				<form:hidden path="idpersonas"/>
+				<div class="form-group">
+					<label>
+						Nombre
+					</label>
+					<form:input path="nombre" />
+				</div>
+				<div class="form-group">
+					<label>
+						Apellido1
+					</label>
+					<form:input path="apellido1" />
+				</div>
+				<div class="form-group">
+					<label>
+						Apellido2
+					</label>
+					<form:input path="apellido2" />
+				</div>
+				<div class="form-group">
+					<label>
+						Dni
+					</label>
+					<form:input path="dni" />
+				</div>
+				<div class="form-group">
+					<label>
+						Fecha de Nacimiento
+					</label>
+					<form:input path="fechaNacimiento" />
+				</div>
+				<button type="submit" class="btn btn-default">
+					Submit
+				</button>
+			</form:form>
+		</div>
 	</div>
-
+</div>
+		
+		
+	</div>
+		<script src="static/js/jquery.min.js"></script>
+	    <script src="static/js/bootstrap.min.js"></script>
+	    <script src="static/js/scripts.js"></script>
 </body>
 </html>

@@ -19,7 +19,7 @@ import javax.persistence.Table;
 
 
 @Entity
-@Table(name= "telefonos")
+@Table(name= "TELEFONOS")
 public class Telefono {
 	
 	private int idtelefonos;
@@ -46,7 +46,10 @@ public class Telefono {
 	public void setIdtelefonos(int idtelefonos) {
 		this.idtelefonos = idtelefonos;
 	}
-
+	/*//Funciona
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "idPersona")*/
+	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idPersona")
 	public Persona getPersona() {
