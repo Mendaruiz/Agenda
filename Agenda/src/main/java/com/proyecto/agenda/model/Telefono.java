@@ -50,7 +50,7 @@ public class Telefono {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "idPersona")*/
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "idPersona")
 	public Persona getPersona() {
 		return persona;

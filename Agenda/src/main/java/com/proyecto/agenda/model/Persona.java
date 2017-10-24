@@ -43,6 +43,9 @@ public class Persona implements Serializable{
 	@OneToMany (mappedBy="telefono")
 	private List<Telefono> telefonos;
 	
+	@OneToMany (mappedBy="direccion")
+	private List<Direccion> direcciones;
+	
 	public Persona() {
 		
 	}
@@ -57,6 +60,21 @@ public class Persona implements Serializable{
 		this.dni = dni;
 		this.fechaNacimiento = fechaNacimiento;
 		this.telefonos = telefonos;
+	}
+
+	
+
+	public Persona(int idpersonas, String nombre, String apellido1, String apellido2, String dni, Date fechaNacimiento,
+			List<Telefono> telefonos, List<Direccion> direcciones) {
+		
+		this.idpersonas = idpersonas;
+		this.nombre = nombre;
+		this.apellido1 = apellido1;
+		this.apellido2 = apellido2;
+		this.dni = dni;
+		this.fechaNacimiento = fechaNacimiento;
+		this.telefonos = telefonos;
+		this.direcciones = direcciones;
 	}
 
 
@@ -107,6 +125,17 @@ public class Persona implements Serializable{
 
 	public void setTelefonos(List<Telefono> telefonos) {
 		this.telefonos = telefonos;
+	}
+
+
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "persona")
+	public List<Direccion> getDirecciones() {
+		return direcciones;
+	}
+
+
+	public void setDirecciones(List<Direccion> direcciones) {
+		this.direcciones = direcciones;
 	}
 
 

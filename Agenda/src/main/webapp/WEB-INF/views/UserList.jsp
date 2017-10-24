@@ -43,6 +43,9 @@
 						<li>
 							<a href="telefonos">Telefonos</a>
 						</li>
+						<li>
+							<a href="direcciones">Direcciones</a>
+						</li>
 					</ul>
 					<form:form class="navbar-form navbar-left" action="search" method="get">
 						<div class="form-group">

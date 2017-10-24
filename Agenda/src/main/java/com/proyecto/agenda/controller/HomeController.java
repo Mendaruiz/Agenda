@@ -18,9 +18,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.proyecto.agenda.model.Direccion;
 import com.proyecto.agenda.model.Persona;
 import com.proyecto.agenda.model.Telefono;
 import com.proyecto.agenda.model.User;
+import com.proyecto.agenda.services.IDireccionService;
 import com.proyecto.agenda.services.IPersonaService;
 import com.proyecto.agenda.services.ITelefonoService;
 
@@ -31,6 +33,8 @@ public class HomeController {
 	private IPersonaService personaService;
 	@Autowired
 	private ITelefonoService telefonoService;
+	@Autowired
+	private IDireccionService direccionService;
 	
 	@RequestMapping("/")
 	public ModelAndView handleRequest() throws Exception {
@@ -106,6 +110,18 @@ public class HomeController {
 		return model;
 		
 	}
+	
+
+	@RequestMapping(value = "/direcciones", method = RequestMethod.GET)
+	public ModelAndView listarDirecciones(){
+		System.out.println("/telefonos");
+		ModelAndView model = new ModelAndView("DirList");
+		List<Direccion> direcciones = direccionService.list();
+		model.addObject("direcciones", direcciones);
+		return model;
+		
+	}
+	
 	
 	@RequestMapping(value = "/new", method = RequestMethod.GET)
 	public ModelAndView newPersona() {
