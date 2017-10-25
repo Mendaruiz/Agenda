@@ -47,8 +47,9 @@ public class PersonasDAOImpl implements IPersonasDAO {
 		
 		Criteria criteria =  sessionFactory.getCurrentSession().createCriteria(Persona.class).add(Restrictions.eq("idpersonas", id));
 		Persona p1 = (Persona) criteria.uniqueResult();
-		System.out.println(p1);
-
+		System.out.println("Entra en el get de Persona");
+		System.out.println(p1.toString());
+		System.out.println("Sale del get");
 		return p1;
 		
 		/*

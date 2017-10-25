@@ -132,8 +132,8 @@ public class Persona implements Serializable{
 				+ apellido2 + ", dni=" + dni + ", fechaNacimiento=" + fechaNacimiento + ", telefonos=" + telefonos
 				+ "]";
 	}
-	*/
 	
+	*/
 
 	
 	

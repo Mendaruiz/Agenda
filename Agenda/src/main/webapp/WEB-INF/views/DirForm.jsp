@@ -1,8 +1,12 @@
+<%@page import="com.proyecto.agenda.model.Telefono"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page import="java.util.*" %>
 <%@ page import="java.text.SimpleDateFormat"%>
+<%@ page import="com.proyecto.agenda.model.*"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 
 <html>
@@ -17,51 +21,52 @@
         <link href="static/css/bootstrap.min.css" rel="stylesheet" /> 
         <link href="static/css/style.css" rel="stylesheet" /> 
 			
-<title>FORMULARIO DE USUARIOS</title>
+<title>FORMULARIO DE TELEFONOS</title>
 
 </head>
 <body>
 	<div align="center">
-		<h1>FORMULARIO DE USUARIOS </h1>	
+		<h1>FORMULARIO DE TELEFONOS </h1>	
 	</div>
-			
 	<%@include file="cabecera.jsp" %>
-		
+		<%
+					
+					int id = (Integer)request.getAttribute("idPersona");
+					System.out.println("---------------- Entra en el DirForm -------------------- " + id);
+					Direccion direccion = (Direccion) request.getAttribute("direccion");
+					System.out.println(direccion.toString());
+				%>
 	<div class="container-fluid">
 	<div class="row">
 		<div class="col-md-6 col-md-offset-3" >
-			<form:form action="save" method="get"  modelAttribute="persona">
-				<form:hidden path="idpersonas"/>
+			<form:form action="saveDir" method="get"  modelAttribute="direccion">
+				<form:hidden path="iddirecciones"/>
+				<form:hidden path="persona.idpersonas" value="<%=id%>"/>
 				<div class="form-group">
 					<label>
-						Nombre
+						Direccion
 					</label>
-					<form:input path="nombre" class="form-control"/>
+					<form:input path="direccion" class="form-control"/>
 				</div>
 				<div class="form-group">
 					<label>
-						1º Apellido
+						Codigo Postal
 					</label>
-					<form:input path="apellido1" class="form-control"/>
+					<form:input path="codPostal" class="form-control"/>
 				</div>
 				<div class="form-group">
 					<label>
-						2º Apellido
+						Localidad
 					</label>
-					<form:input path="apellido2" class="form-control"/>
+					<form:input path="localidad" class="form-control"/>
 				</div>
 				<div class="form-group">
 					<label>
-						Dni
+						Provincia
 					</label>
-					<form:input path="dni" class="form-control"/>
+					<form:input path="provincia" class="form-control"/>
 				</div>
-				<div class="form-group">
-					<label>
-						Fecha de Nacimiento
-					</label>
-					<form:input path="fechaNacimiento" class="form-control"/>
-				</div>
+				
 				<button type="submit" class="btn btn-default">
 					Guardar Registro
 				</button>

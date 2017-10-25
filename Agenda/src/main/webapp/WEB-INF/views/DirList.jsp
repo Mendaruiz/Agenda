@@ -20,7 +20,7 @@
 </head>
 <body>
 	<div align="center">
-		<h1>LISTADO DE TELEFONOS</h1>
+		<h1>LISTADO DE DIRECCIONES</h1>
 	
 	</div>
 	<%@include file="cabecera.jsp" %>
@@ -34,17 +34,22 @@
 				<thead>
 					<tr>
 						<th>Persona</th>
-						<th>telefono</th>
+						<th>Direccion</th>
+						<th>Codigo Postal</th>
+						<th>Localidad</th>
+						<th>Provincia</th>
 						<th>Eliminar</th>
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach var="telefono" items="${telefonos}">
+					<c:forEach var="direccion" items="${direcciones}">
 						<tr class="success">
-							<td>${telefono.persona.nombre} ${telefono.persona.apellido1} ${telefono.persona.apellido2}</td>
-							<td>${telefono.telefono}</td>
-							<td><a href="deleteTel?id=${telefono.idtelefonos}">Eliminar</a></td>
-							
+							<td>${direccion.persona.nombre} ${direccion.persona.apellido1} ${direccion.persona.apellido2}</td>
+							<td>${direccion.direccion}</td>
+							<td>${direccion.codPostal}</td>
+							<td>${direccion.localidad}</td>
+							<td>${direccion.provincia}</td>	
+							<td><a href="deleteDir?id=${direccion.iddirecciones}">Eliminar</a></td>
 						</tr>
 					</c:forEach>
 				</tbody>

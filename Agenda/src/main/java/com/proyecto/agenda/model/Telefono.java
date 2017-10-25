@@ -21,7 +21,6 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name= "TELEFONOS")
-@Proxy(lazy = false)
 public class Telefono {
 	
 	private int idtelefonos;
@@ -70,12 +69,12 @@ public class Telefono {
 		this.telefono = telefono;
 	}
 	
-	/*
+	
 	@Override
 	public String toString() {
 		return "Telefono [idtelefonos=" + idtelefonos + ", persona=" + persona + ", telefono=" + telefono + "]";
 	}
-	*/
+	
 	
 	
 	

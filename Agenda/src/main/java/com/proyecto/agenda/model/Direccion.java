@@ -14,22 +14,22 @@ import org.hibernate.annotations.Proxy;
 
 @Entity
 @Table(name="DIRECCIONES")
-@Proxy(lazy = false)
 public class Direccion{
 	
 		private int iddirecciones;
+		private Persona persona;
 		private String direccion;
 		private String codPostal;
 		private String localidad;
 		private String provincia;
-		private Persona persona;
+		
 		
 		public Direccion() {
 			
 		}
 		
-		public Direccion(int iddirecciones, String direccion, String codPostal, String localidad, String provincia,
-				Persona persona) {
+		public Direccion(int iddirecciones, Persona persona, String direccion, String codPostal, String localidad, String provincia
+				) {
 			this.iddirecciones = iddirecciones;
 			this.direccion = direccion;
 			this.codPostal = codPostal;
@@ -88,6 +88,13 @@ public class Direccion{
 		public void setProvincia(String provincia) {
 			this.provincia = provincia;
 		}
+
+		@Override
+		public String toString() {
+			return "Direccion [iddirecciones=" + iddirecciones + ", direccion=" + direccion + ", codPostal=" + codPostal
+					+ ", localidad=" + localidad + ", provincia=" + provincia + ", persona=" + persona + "]";
+		}
+		
 		
 		
 }

@@ -1,5 +1,6 @@
 package com.proyecto.agenda.controller;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -70,11 +71,33 @@ public class HomeController {
 		return model;
 	}
 	
+	@RequestMapping(value = "/direccion", method = RequestMethod.GET)
+	public ModelAndView listarDireccion(){
+		System.out.println(" ----------------- /direcccion ------------------");
+		ModelAndView model = new ModelAndView("DirList");
+		List<Direccion> direcciones = direccionService.list();
+		model.addObject("direcciones", direcciones);
+		return model;
+	}
+	
 	@RequestMapping(value="/delete", method=RequestMethod.GET)
 	public ModelAndView deletePersona(HttpServletRequest request){
 		int personaId = Integer.parseInt(request.getParameter("id"));
 		personaService.delete(personaId);
 		return new ModelAndView("redirect:/");
+	}
+	
+	@RequestMapping(value="/deleteDir", method=RequestMethod.GET)
+	public ModelAndView deleteDireccion(HttpServletRequest request){
+		int personaId = Integer.parseInt(request.getParameter("id"));
+		direccionService.delete(personaId);
+		return new ModelAndView("redirect:/direcciones");
+	}
+	@RequestMapping(value="/deleteTel", method=RequestMethod.GET)
+	public ModelAndView deleteTelefono(HttpServletRequest request){
+		int personaId = Integer.parseInt(request.getParameter("id"));
+		telefonoService.delete(personaId);
+		return new ModelAndView("redirect:/telefonos");
 	}
 	
 	@RequestMapping(value = "/detalle", method = RequestMethod.GET)
@@ -105,6 +128,7 @@ public class HomeController {
 		model.addObject("persona", new Persona());
 		return model;		
 	}
+		
 	
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
 	public ModelAndView searchPersona(HttpServletRequest request) {
@@ -128,6 +152,79 @@ public class HomeController {
 		}
 		personaService.saveOrUpdate(persona);
 		return new ModelAndView("redirect:/");
+	}
+	
+	@RequestMapping(value = "/newTel", method = RequestMethod.GET)
+	public ModelAndView newTelefono(HttpServletRequest request) {
+		System.out.println("------------------  Entra en newTel ----------------------");
+		System.out.println("/newTel");
+		int idPersona = Integer.parseInt(request.getParameter("id"));
+		ModelAndView model = new ModelAndView("TlfForm");
+		Telefono telefono = new Telefono();
+		telefono.setPersona(personaService.get(idPersona));
+		model.addObject("telefono", telefono);
+		model.addObject("idPersona", idPersona);
+		return model;		
+	}
+	
+	@RequestMapping(value = "/saveTlf", method = RequestMethod.GET)
+	public ModelAndView saveTlf(@ModelAttribute Telefono telefono ,BindingResult br, HttpServletRequest request) {
+		if(br.hasErrors()){
+			System.out.println("------------------------- Entra en el error -------------------------");
+			ModelAndView model = new ModelAndView("TlfForm");
+			model.addObject("telefono", telefono);
+			return model;
+		}
+		System.out.println("------------------  Entra en saveTlf ----------------------");
+		System.out.println(telefono.toString());
+		telefonoService.saveOrUpdate(telefono);
+		return new ModelAndView("redirect:/");
+	}
+	
+	@RequestMapping(value = "/newDir", method = RequestMethod.GET)
+	public ModelAndView newDireccion(HttpServletRequest request) {
+		System.out.println("------------------  Entra en newDir ----------------------");
+		System.out.println("/newDir");
+		int idPersona = Integer.parseInt(request.getParameter("id"));
+		ModelAndView model = new ModelAndView("DirForm");
+		Direccion direccion = new Direccion();
+		System.out.println("Introducimos en el telefono la persona con la id correspondiente");
+		direccion.setPersona(personaService.get(idPersona));
+		System.out.println("Mostramos el nombre de la persona: " + direccion.getPersona().getNombre());
+		model.addObject("direccion", direccion);
+		model.addObject("idPersona", idPersona);
+		return model;		
+	}
+	
+	@RequestMapping(value = "/saveDir", method = RequestMethod.GET)
+	public ModelAndView saveDir(@ModelAttribute Direccion direccion ,BindingResult br, HttpServletRequest request) {
+		if(br.hasErrors()){
+			System.out.println("------------------------- Entra en el error -------------------------");
+			System.out.println(direccion.toString());
+			System.out.println();
+			ModelAndView model = new ModelAndView("DirForm");
+			model.addObject("direccion", direccion);
+			return model;
+		}
+		try {
+			request.setCharacterEncoding("UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("------------------  Entra en saveDir ----------------------");
+		System.out.println(direccion.toString());
+		direccionService.saveOrUpdate(direccion);
+		return new ModelAndView("redirect:/");
+	}
+	
+	@RequestMapping(value = "/editPerson", method = RequestMethod.GET)
+	public ModelAndView editUser(HttpServletRequest request) {
+		int userId = Integer.parseInt(request.getParameter("id"));
+		Persona persona = personaService.get(userId);
+		ModelAndView model = new ModelAndView("UserForm");
+		model.addObject("persona", persona);
+		return model;		
 	}
 	
 }

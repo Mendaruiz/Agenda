@@ -4,7 +4,6 @@
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 
-
 <html>
 <head>
 <meta charset="UTF-8">
@@ -14,8 +13,12 @@
         <spring:url value="static/css/custom.css" var="custom"/>
         <link href="${custom}" rel="stylesheet" /> 
         <link href="static/css/bootstrap.min.css" rel="stylesheet" /> 
-        <link href="static/css/style.css" rel="stylesheet" /> 
-
+        <link href="static/css/style.css" rel="stylesheet" />  
+        
+        <!-- 
+         Descomentar luego
+		<link rel="stylesheet" href="https://daneden.github.io/animate.css/animate.min.css">
+		-->
 
 <title>LISTADO DE USUARIOS</title>
 </head>
@@ -23,41 +26,17 @@
 	<div align="center">
 		<h1>LISTADO DE USUARIOS</h1>
 	</div>
+	
+	<%@include file="cabecera.jsp" %>
+	<!--
 	<div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
-			
-			<nav class="navbar navbar-default navbar-static-top" role="navigation">
-				<div class="navbar-header">
-					 
-					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-						 <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
-					</button> <a class="navbar-brand" href="#">Agenda</a>
-				</div>
-				
-				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-					<ul class="nav navbar-nav">
-						<li >
-							<a href="new">Añadir Usuario</a>
-						</li>
-						<li>
-							<a href="telefonos">Telefonos</a>
-						</li>
-					</ul>
-					<form:form class="navbar-form navbar-left" action="search" method="get">
-						<div class="form-group">
-							<input type="text" class="form-control" name="nombre">
-						</div> 
-						<button type="submit" class="btn btn-default">
-							Buscar Datos
-						</button>
-					</form:form>
-					
-				</div>
-				
-			</nav>
-			<table class="table table-hover">
-				<thead>
+		<div class="navbar-center">
+						  <input id="searchTerm" type="text" class="btn btn-default " placeholder="Escriba algo para filtrar" onkeyup="doSearch()"/>
+					</div>
+			<table id="datos" class="table table-hover sortable ">
+			<thead>
 					<tr>
 						<th>
 							Nombre
@@ -72,10 +51,19 @@
 							Fecha de Nacimiento
 						</th>
 						<th>
+							Editar Persona
+						</th>
+						<th>
 							Telefonos
 						</th>
 						<th>
+							Insertar Telefono
+						</th>
+						<th>
 							Direcciones
+						</th>
+						<th>
+							Insertar Direccion
 						</th>
 						<th>
 							Eliminar
@@ -89,16 +77,22 @@
 							<td>${persona.apellido1} ${persona.apellido2}</td>
 							<td>${persona.dni}</td>
 							<td><fmt:formatDate pattern="dd-MM-yyyy" value="${persona.fechaNacimiento}" /></td>
+							<td><a href="editPerson?id=${persona.idpersonas}">Editar</a></td>
+							
 							<td>
 								<c:forEach var="telefono" items="${persona.telefonos}">
 									<p>${telefono.telefono}</p>
 								</c:forEach>
 							</td>
+							<td><a href="newTel?id=${persona.idpersonas}">Añadir Telefono</a></td>
 							<td>
 								<c:forEach var="direccion" items="${persona.direcciones}">
 									<p>${direccion.direccion}</p>
 								</c:forEach>
 							</td>
+							<td><a href="newDir?id=${persona.idpersonas}">Añadir Direccion</a></td>
+							
+							
 							<td><a href="delete?id=${persona.idpersonas}">Eliminar</a></td>
 						</tr>
 					</c:forEach>
@@ -106,7 +100,9 @@
 			</table>
 		</div>
 	</div>
-</div>
+</div>-->
+
+
 
 	
 	
@@ -114,5 +110,160 @@
 	<script src="static/js/jquery.min.js"></script>
     <script src="static/js/bootstrap.min.js"></script>
     <script src="static/js/scripts.js"></script>
+    <script src="static/js/sorttable.js"></script>
+    
+    <!-- 
+    prueba
+     -->
+     
+    
+
+<div class="container-fluid" style="margin-top:20px;">
+<div class="row">
+<div id="user" class="col-md-8 col-md-offset-2" >
+  <div class="panel panel-primary panel-table animated slideInDown">
+   <div class="panel-heading " style="padding:5px;">
+        <div class="row">
+        <div class="col col-xs-3 text-left">
+            <a href="telefonos" class="btn btn-default"><i class="glyphicon glyphicon-phone"></i>Telefonos</a>
+            <a href="direcciones" class="btn btn-default"><i class="glyphicon glyphicon-map-marker"></i>Direcciones</a>
+        </div>
+        <div class="col col-xs-5 text-center">
+            <h1 class="panel-title">Lista de Contactos</h1>
+        </div>
+        <div class="col col-xs-2 text-center" >
+         	<div class="navbar-center">
+						<input id="searchTerm" type="text" class="btn btn-default " placeholder="Escriba algo para filtrar" onkeyup="doSearch()"/>
+					</div>
+        </div>
+        <div class="col col-xs-2 text-right ">
+          <button type="button" class="btn  btn-success "> ADD NEW<i class="fa fa-plus-square" ></i></button>
+        </div>
+        </div>
+    </div>
+   <div class="panel-body">
+     <div class="tab-content">
+      <div role="tabpanel" class="tab-pane active" id="list">
+       <table id="datos" class="table table-striped table-hover table-bordered table-list sortable">
+			<thead>
+					<tr>
+						<th>
+							Nombre
+						</th>
+						<th>
+							Apellidos 
+						</th>
+						<th>
+							DNI
+						</th>
+						<th>
+							Fecha de Nacimiento
+						</th>
+						<th>
+							Editar Persona
+						</th>
+						<th>
+							Telefonos
+						</th>
+						<th>
+							Insertar Telefono
+						</th>
+						<th>
+							Direcciones
+						</th>
+						<th>
+							Insertar Direccion
+						</th>
+						<th>
+							Eliminar
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach var="persona" items="${lista}">
+						<tr class="success">
+							<td><a href="detalle?idpersona=${persona.idpersonas}">${persona.nombre}</a></td>
+							<td>${persona.apellido1} ${persona.apellido2}</td>
+							<td>${persona.dni}</td>
+							<td><fmt:formatDate pattern="dd-MM-yyyy" value="${persona.fechaNacimiento}" /></td>
+							<td><a href="editPerson?id=${persona.idpersonas}" class="btn btn-primary" title="Editar"    ><i class="glyphicon glyphicon-pencil">    	</i></a></td>
+							
+							<td>
+								<c:forEach var="telefono" items="${persona.telefonos}">
+									<p>${telefono.telefono}</p>
+								</c:forEach>
+							</td>
+							<td><a href="newTel?id=${persona.idpersonas}" class="btn btn-success" title="Añadir Telefono"    ><i class="glyphicon glyphicon-earphone">    	</i></a></td>
+							<td>
+								<c:forEach var="direccion" items="${persona.direcciones}">
+									<p>${direccion.direccion}</p>
+								</c:forEach>
+							</td>
+							<td><a href="newDir?id=${persona.idpersonas}"class="btn btn-info" title="Añadir direccion"    ><i class="glyphicon glyphicon-home">    	</i></a></td>
+							
+							
+							<td><a href="delete?id=${persona.idpersonas}" class="btn btn-danger"  title="delete" ><i class="glyphicon glyphicon-trash" >		</i></a></td>
+						</tr>
+					</c:forEach>
+				</tbody>
+        </table>
+      </div><!-- END id="list" -->
+        
+        <!-- END id="thumb" -->
+       
+     </div><!-- END tab-content --> 
+    </div>
+   
+  </div><!--END panel-table-->
+</div>
+</div>
+</div>
+    
+<script language="javascript">
+		function doSearch()
+		{
+			var tableReg = document.getElementById('datos');
+			var searchText = document.getElementById('searchTerm').value.toLowerCase();
+			var cellsOfRow="";
+			var found=false;
+			var compareWith="";
+ 
+			// Recorremos todas las filas con contenido de la tabla
+			for (var i = 1; i < tableReg.rows.length; i++)
+			{
+				cellsOfRow = tableReg.rows[i].getElementsByTagName('td');
+				found = false;
+				// Recorremos todas las celdas
+				for (var j = 0; j < cellsOfRow.length && !found; j++)
+				{
+					compareWith = cellsOfRow[j].innerHTML.toLowerCase();
+					// Buscamos el texto en el contenido de la celda
+					if (searchText.length == 0 || (compareWith.indexOf(searchText) > -1))
+					{
+						found = true;
+					}
+				}
+				if(found)
+				{
+					tableReg.rows[i].style.display = '';
+				} else {
+					// si no ha encontrado ninguna coincidencia, esconde la
+					// fila de la tabla
+					tableReg.rows[i].style.display = 'none';
+				}
+			}
+		}
+	</script>    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 </body>
 </html>
