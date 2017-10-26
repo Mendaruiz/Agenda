@@ -41,26 +41,13 @@ public class HomeController {
 	public ModelAndView handleRequest() throws Exception {
 
 		System.out.println("Entra en la /");
-		
-		
 		List<Persona> personas = personaService.list();
 		ModelAndView model = new ModelAndView("UserList");
-		
-		/* 
-		for(int i = 0; i < personas.size(); i ++){
-			System.out.println(personas.get(i).toString());
-		}*/
-		
-		model.addObject("lista", personas);	
+		model.addObject("lista", personas);
 		return model;
 		
 	}
-	/*
-	@RequestMapping(value ="/", method = RequestMethod.GET)
-	public ModelAndView principal(){
-		ModelAndView model = new ModelAndView("/");
-	}
-	*/
+
 	
 	@RequestMapping(value = "/telefonos", method = RequestMethod.GET)
 	public ModelAndView listarTelfonos(){
@@ -136,12 +123,18 @@ public class HomeController {
 		String nombre = request.getParameter("nombre");
 		List<Persona> lista = new ArrayList<>();
 		lista = personaService.get(nombre);
+		
+		for(int i = 0; i < lista.size(); i++){
+			System.out.println(lista.get(i).getNombre());
+		}
+		
+		
 		ModelAndView model = new ModelAndView("UserSearch");
 		model.addObject("lista", lista);
 		return model;	
 	}
 	
-	@RequestMapping(value = "/save", method = RequestMethod.GET)
+	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public ModelAndView saveUser(@ModelAttribute Persona persona ,BindingResult br) {
 		if(br.hasErrors()){
 			System.out.println("Entra en el error");
@@ -167,13 +160,19 @@ public class HomeController {
 		return model;		
 	}
 	
-	@RequestMapping(value = "/saveTlf", method = RequestMethod.GET)
+	@RequestMapping(value = "/saveTlf", method = RequestMethod.POST)
 	public ModelAndView saveTlf(@ModelAttribute Telefono telefono ,BindingResult br, HttpServletRequest request) {
 		if(br.hasErrors()){
 			System.out.println("------------------------- Entra en el error -------------------------");
 			ModelAndView model = new ModelAndView("TlfForm");
 			model.addObject("telefono", telefono);
 			return model;
+		}
+		try {
+			request.setCharacterEncoding("UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		System.out.println("------------------  Entra en saveTlf ----------------------");
 		System.out.println(telefono.toString());
@@ -196,7 +195,7 @@ public class HomeController {
 		return model;		
 	}
 	
-	@RequestMapping(value = "/saveDir", method = RequestMethod.GET)
+	@RequestMapping(value = "/saveDir", method = RequestMethod.POST)
 	public ModelAndView saveDir(@ModelAttribute Direccion direccion ,BindingResult br, HttpServletRequest request) {
 		if(br.hasErrors()){
 			System.out.println("------------------------- Entra en el error -------------------------");
@@ -206,12 +205,14 @@ public class HomeController {
 			model.addObject("direccion", direccion);
 			return model;
 		}
+		
 		try {
 			request.setCharacterEncoding("UTF-8");
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		System.out.println("------------------  Entra en saveDir ----------------------");
 		System.out.println(direccion.toString());
 		direccionService.saveOrUpdate(direccion);

@@ -39,7 +39,7 @@
 	<div class="container-fluid">
 	<div class="row">
 		<div class="col-md-6 col-md-offset-3" >
-			<form:form action="saveDir" method="get"  modelAttribute="direccion">
+			<form:form action="saveDir" method="post"  modelAttribute="direccion">
 				<form:hidden path="iddirecciones"/>
 				<form:hidden path="persona.idpersonas" value="<%=id%>"/>
 				<div class="form-group">

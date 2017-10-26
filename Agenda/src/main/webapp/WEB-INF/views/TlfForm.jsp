@@ -4,7 +4,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page import="java.util.*" %>
 <%@ page import="java.text.SimpleDateFormat"%>
-<%@ page import="com.proyecto.agenda.dao.*"%>
+<%@ page import="com.proyecto.agenda.model.*"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
 
@@ -39,7 +40,7 @@
 	<div class="container-fluid">
 	<div class="row">
 		<div class="col-md-6 col-md-offset-3" >
-			<form:form action="saveTlf" method="get"  modelAttribute="telefono">
+			<form:form action="saveTlf" method="post"  modelAttribute="telefono">
 				<form:hidden path="idtelefonos"/>
 				<form:hidden path="persona.idpersonas" value="<%=id%>"/>
 				<div class="form-group">

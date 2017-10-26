@@ -5,8 +5,10 @@ import java.util.List;
 
 
 import org.hibernate.Criteria;
+import org.hibernate.FetchMode;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -33,11 +35,13 @@ public class PersonasDAOImpl implements IPersonasDAO {
 
 	@Override
 	@Transactional
-	public List<Persona> list() {
+	public List<Persona> list() throws NullPointerException{
 		@SuppressWarnings("unchecked")
 		List<Persona> listPersona = (List<Persona>) sessionFactory.getCurrentSession()
 				.createCriteria(Persona.class)
+				.setFetchMode("idtelefonos", FetchMode.JOIN).setFetchMode("iddirecciones", FetchMode.JOIN)
 				.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+		
 		return listPersona;
 	}
 
@@ -95,9 +99,17 @@ public class PersonasDAOImpl implements IPersonasDAO {
 	@Override
 	public List<Persona> get(String nombre) {
 		
-		List<Persona> listPersona = (List<Persona>) sessionFactory.getCurrentSession().createCriteria(Persona.class).add(Restrictions.like("nombre", "%" + nombre + "%")).list();
-
-		return listPersona;
+		System.out.println("Entra en el get persona con el nombre: " + nombre);
+		@SuppressWarnings("unchecked")
+		List<Persona> list = (List<Persona>) sessionFactory.getCurrentSession()
+		.createCriteria(Persona.class)
+		.add(Restrictions.like("nombre", "%" + nombre + "%"))
+		.setFetchMode("idtelefonos", FetchMode.JOIN).setFetchMode("iddirecciones", FetchMode.JOIN)
+		.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY).list();
+		
+		
+		
+		return list;
 	}
 
 }

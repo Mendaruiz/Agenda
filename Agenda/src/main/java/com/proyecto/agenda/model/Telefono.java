@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.Proxy;
 
 import javax.persistence.CascadeType;
@@ -24,6 +26,9 @@ import javax.persistence.Table;
 public class Telefono {
 	
 	private int idtelefonos;
+	/*
+	@ManyToOne(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
+	@JoinColumn(name="idPersona")*/
 	private Persona persona;
 	private String telefono;
 	
@@ -47,12 +52,12 @@ public class Telefono {
 	public void setIdtelefonos(int idtelefonos) {
 		this.idtelefonos = idtelefonos;
 	}
-	/*//Funciona
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "idPersona")*/
+
 	
 	@ManyToOne(fetch = FetchType.EAGER)
+	@Fetch (FetchMode.SELECT)
 	@JoinColumn(name = "idPersona")
+	
 	public Persona getPersona() {
 		return persona;
 	}

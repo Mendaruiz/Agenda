@@ -1,5 +1,6 @@
 package com.proyecto.agenda.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,13 +11,19 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Proxy;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 
 @Entity
 @Table(name="DIRECCIONES")
 public class Direccion{
 	
 		private int iddirecciones;
+		/*
+		@ManyToOne(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
+		@JoinColumn(name="idPersona")
+		*/
 		private Persona persona;
 		private String direccion;
 		private String codPostal;
@@ -49,7 +56,9 @@ public class Direccion{
 		}
 		
 		@ManyToOne(fetch = FetchType.EAGER)
+		@Fetch (FetchMode.SELECT)
 		@JoinColumn(name = "idPersona")
+		
 		public Persona getPersona() {
 			return persona;
 		}

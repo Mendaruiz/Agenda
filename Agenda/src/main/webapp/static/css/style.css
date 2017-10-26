@@ -45,3 +45,6 @@ overflow:hidden;
   height:60px;
   padding:0px;
 }
+.hiddenRow {
+    padding: 0 !important;
+}

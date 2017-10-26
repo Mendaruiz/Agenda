@@ -11,13 +11,13 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import org.hibernate.FetchMode;
+import org.hibernate.annotations.Cascade;
+//import org.hibernate.FetchMode;
 import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.IndexColumn;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -40,10 +40,10 @@ public class Persona implements Serializable{
 	@JoinColumn(name = "persona_Id",referencedColumnName = "idempleados")
 	private Empleado empleado;*/
 	
-	@OneToMany (mappedBy="iddirecciones")
+	/*@OneToMany (mappedBy="persona",cascade = CascadeType.ALL)*/
 	private List<Direccion> direcciones;
 	
-	@OneToMany (mappedBy="telefono")
+	/*@OneToMany (mappedBy="persona", cascade = CascadeType.ALL)*/
 	private List<Telefono> telefonos;
 	
 	public Persona() {
@@ -105,7 +105,9 @@ public class Persona implements Serializable{
 	}
 	
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "persona")
+	@Fetch (FetchMode.SELECT)
 	@IndexColumn(name="idtelefonos")
+	
 	public List<Telefono> getTelefonos() {
 		return telefonos;
 	}
@@ -115,7 +117,9 @@ public class Persona implements Serializable{
 	}
 	
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "persona")
+	@Fetch (FetchMode.SELECT)
 	@IndexColumn(name="iddirecciones")
+	
 	public List<Direccion> getDirecciones() {
 		return direcciones;
 	}
@@ -125,16 +129,24 @@ public class Persona implements Serializable{
 		this.direcciones = direcciones;
 	}
 	 
-	/*
 	@Override
 	public String toString() {
 		return "Persona [idpersonas=" + idpersonas + ", nombre=" + nombre + ", apellido1=" + apellido1 + ", apellido2="
-				+ apellido2 + ", dni=" + dni + ", fechaNacimiento=" + fechaNacimiento + ", telefonos=" + telefonos
+				+ apellido2 + ", dni=" + dni + ", fechaNacimiento=" + fechaNacimiento 
 				+ "]";
 	}
 	
-	*/
 
-	
+	public String mostrarTelefonos(List<Telefono> telefonos){
+		String salida= "";
+		System.out.println("Entra en mostrarTelefonos");
+		
+		for(int i = 0; i< telefonos.size(); i++){
+			System.out.println(telefonos.get(i).getTelefono());
+		}
+		
+		return salida;
+		
+	}
 	
 }
