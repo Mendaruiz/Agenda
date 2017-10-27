@@ -16,10 +16,9 @@
 <link href="static/css/bootstrap.min.css" rel="stylesheet" />
 <link href="static/css/style.css" rel="stylesheet" />
 
-<!-- 
-         Descomentar luego
-		<link rel="stylesheet" href="https://daneden.github.io/animate.css/animate.min.css">
-		-->
+ 
+
+		
 
 <title>LISTADO DE USUARIOS</title>
 </head>

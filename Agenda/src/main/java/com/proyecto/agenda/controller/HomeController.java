@@ -58,9 +58,10 @@ public class HomeController {
 		return model;
 	}
 	
-	@RequestMapping(value = "/direccion", method = RequestMethod.GET)
-	public ModelAndView listarDireccion(){
-		System.out.println(" ----------------- /direcccion ------------------");
+	
+	@RequestMapping(value = "/direcciones", method = RequestMethod.GET)
+	public ModelAndView listarDirecciones(){
+		System.out.println("/direcciones");
 		ModelAndView model = new ModelAndView("DirList");
 		List<Direccion> direcciones = direccionService.list();
 		model.addObject("direcciones", direcciones);
@@ -98,14 +99,6 @@ public class HomeController {
 		return model;	
 	}
 	
-	@RequestMapping(value = "/direcciones", method = RequestMethod.GET)
-	public ModelAndView listarDirecciones(){
-		System.out.println("/direcciones");
-		ModelAndView model = new ModelAndView("DirList");
-		List<Direccion> direcciones = direccionService.list();
-		model.addObject("direcciones", direcciones);
-		return model;
-	}
 	
 	
 	@RequestMapping(value = "/new", method = RequestMethod.GET)
